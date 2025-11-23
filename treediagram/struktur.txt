@@ -1,0 +1,150 @@
+surat_masuk_dan_keluar_punya_raihan/
+│
+├─ pages/
+│  │
+│  ├─ user/                     ← layout untuk role user (back office)
+│  │  ├─ header.php             ← head, link CSS, judul halaman
+│  │  ├─ navbar.php             ← navigasi atas user
+│  │  ├─ sidebar.php            ← sidebar menu user (kelola user, kategori, konten, komentar)
+│  │  └─ footer.php
+|  |  
+│  │
+│  ├─ pegawai/                   ← layout untuk role pegawai (back office)
+│  │  ├─ header.php
+│  │  ├─ navbar.php
+│  │  ├─ sidebar.php            ← menu lebih sederhana (hanya konten & komentar)
+│  │  └─ footer.php
+|  |  
+│  │
+│  └─ landing/                  ← layout tampilan publik (front office / portal berita)
+│     ├─ header.php             ← head HTML umum, meta tag SEO, CSS portal
+│     ├─ navbar.php             ← menu utama (Home, Kategori, Tentang, Login)
+│     ├─ footer.php             ← footer publik, hak cipta, JS
+│     └─ sidebar_right.php      ← opsional: widget, tag cloud, iklan, dsb.
+│
+│
+├─ assets/
+│  ├─ dist/                     ← komponen utama AdminLTE (CSS, JS, icons, dsb)
+│  │  ├─ css/
+│  │  ├─ js/
+│  │  └─ img/
+│  │
+│  └─ plugins/                  ← plugin tambahan AdminLTE (chart, datatables, wysiwyg, dsb)
+│     ├─ datatables/
+│     ├─ chartjs/
+│     └─ summernote/
+│
+│
+├─ views/
+│  │
+│  ├─ otentikasi_pegawai/       ← halaman otentikasi (login, register, logout)
+│  │  ├─ login_pegawai.php              ← form login user (pegawai/)
+│  │  ├─ register_pegawai.php           ← form pendaftaran (opsional)
+│  │  ├─ logout_pegawai.php             ← proses logout (hapus session)
+│  │  └─ proses_login_pegawai.php       ← proses backend login (cek ke DB, set session)
+|  |
+|  |
+|  ├─otentikasi_user/           ← halaman otentikasi (login, register, logout)
+│  │  ├─ login_user.php              ← form login user (user/)
+│  │  ├─ register_user.php           ← form pendaftaran (opsional)
+│  │  ├─ logout_user.php             ← proses logout (hapus session)
+│  │  └─ proses_login_user.php        ← proses backend login (cek ke DB, set session)
+|  | 
+|  ├─pegawai/
+|  | └─ dashboard_pegawai.php     ← dashboard utama untuk pegawai tidak boleh ada kolola user
+│  │
+│  ├─ user/                     ← konten dashboard untuk user login (extend dari pages/user atau pages/editor)
+│  │  │
+│  │  ├─ user/
+│  │  │  ├─ proses_user.php      ← logic CRUD user
+│  │  │  ├─ daftar_user.php      ← list user untuk user
+│  │  │  ├─ tambah_user.php      ← form tambah user
+│  │  │  ├─ hapus_user.php       ← form hapus user
+│  │  │  ├─ tampilan_user.php    ← form tamoilan user
+│  │  │  └─ edit_user.php        ← form edit user
+│  │  │
+│  │  ├─ kategori/
+│  │  │  ├─ proses_kategori.php  ← logic CRUD user
+│  │  │  ├─ daftar_kategori.php
+│  │  │  ├─ tambah_kategori.php
+│  │  │  ├─ hapus_kategori.php
+│  │  │  └─ edit_kategori.php
+│  │  │
+│  │  ├─ disposisi/
+│  │  │  ├─ proses_disposisi.php  ← logic CRUD user
+│  │  │  ├─ daftar_disposisi.php
+|  |  |  ├─ hapus_disposisi.php
+│  │  │  ├─ tambah_disposisi.php
+│  │  │  └─ edit_disposisi.php
+│  │  │
+│  │  ├─ pegawai/
+│  │  │  ├─ proses_pegawai.php   ← logic CRUD pegawai
+│  │  │  ├─ daftar_pegawai.php
+|  |  |  ├─ hapus_pegawai.php
+│  │  │  ├─ tambah_pegawai.php
+│  │  │  ├─ tampilan_user.php       
+│  │  │  └─ edit_pegawai.php
+│  │  │
+│  │  ├─ surat_keluar/
+│  │  │  ├─ proses_surat_keluar.php  ← logic CRUD surat_keluar
+│  │  │  ├─ daftar_surat_keluar.php
+|  |  |  ├─ hapus_surat_keluar.php
+│  │  │  ├─ tambah_surat_keluar.php
+│  │  │  └─ edit_surat_keluar.php
+│  │  │
+│  │  ├─ surat_masuk/
+│  │  │  ├─ proses_surat_masuk.php  ← logic CRUD surat_masuk
+│  │  │  ├─ daftar_surat_masuk.php
+|  |  |  ├─ hapus_surat_masuk.php
+│  │  │  ├─ tambah_surat_masuk.php
+│  │  │  └─ edit_surat_masuk.php
+│  │  │
+│  │  ├─ komentar/
+│  │  |  ├─ proses_komentar.php  ← logic CRUD komentar
+│  │  |  ├─ daftar_komentar.php
+|  |  |  ├─ hapus_komentar.php
+│  │  |  ├─ tambah_komentar.php
+│  │  |  └─ edit_komentar.php
+|  |  |
+|  |  └─ dashboard_user.php     ← dashboard utama untuk user
+|  | 
+│  │
+│  └─ landing/                  ← tampilan publik (extend dari pages/landing)
+│     ├─ home.php               ← halaman utama portal (daftar artikel)
+│     ├─ kategori.php           ← daftar artikel per kategori
+│     ├─ tentang.php            ← halaman tentang CMS
+│     ├─ kontak.php             ← halaman kontak (opsional)
+│     ├─ detail_konten.php             ← halaman detail_konten (opsional)
+│     ├─ proses_komentar.php    ← logic komentar publik (insert & tampil)
+│     ├─404.php
+│     └─hashbycrypt.php
+|
+|
+├─ includes/                    ← fungsi & keamanan (dibaca semua halaman)
+│  ├─ koneksi.php               ← koneksi database (utama)
+│  ├─ config.php                ← variabel global (base_url, site_name, dll)
+│  ├─ path.php                  
+│  ├─ cek_session.php            ← pengecekan login, redirect jika belum login_user
+│  ├─ cek_session_pegawai.php    ← pengecekan login, redirect jika belum login_pegawai
+│  ├─ fungsi_upload.php          ← helper upload gambar (validasi tipe & ukuran)
+│  ├─ fungsi_validasi.php        ← sanitasi input & validasi form
+│  └─ htaccess/                 ← file keamanan .htaccess untuk referensi
+│
+│
+├─ database/
+│  └─ surat_masuk_dan_keluar_punya_raihan.sql              ← file dump struktur database (opsional)
+│
+├─ uploads/                     ← penyimpanan file publik (gambar user & pegawai)
+│  ├─ user/                     ← foto profil user
+│  ├─ pegawai/                  ← foto profil peminjam
+│  ├─ surat_masuk/              ← gambar dan file surat_masuk
+│  ├─ surat_keluar/             ← gambar dan file surat_keluar
+|  ├─ disposisi/                ← gambar dan file disposisi
+│  ├─ komentar/                 ← gambar dari komentar (opsional)
+│  └─ .htaccess                 ← keamanan: blok eksekusi file PHP
+│
+├─ dashboard.php                ← pusat halaman backend (routing admin/pegawai)
+├─ index.php                    ← pusat halaman publik (routing landing)
+├─ .htaccess                    ← redirect URL, blok akses direktori penting
+├─ README.md                    ← dokumentasi umum proyek
+└─ struktur.txt                 ← dokumentasi struktur folder (file ini)

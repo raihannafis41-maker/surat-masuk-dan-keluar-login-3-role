@@ -1,0 +1,252 @@
+-- Database: `suratmasuksuratkeluarnaila`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id_admin` int NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `nama_lengkap` varchar(100) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `no_hp` varchar(20) DEFAULT NULL,
+  `foto_admin` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `disposisi`
+--
+
+CREATE TABLE `disposisi` (
+  `id_disposisi` int NOT NULL,
+  `id_suratmasuk` int DEFAULT NULL,
+  `id_suratkeluar` int DEFAULT NULL,
+  `id_admin` int NOT NULL,
+  `tujuan_disposisi` varchar(100) NOT NULL,
+  `isi_disposisi` text,
+  `tgl_disposisi` date DEFAULT NULL,
+  `status_disposisi` enum('baru','diproses','selesai') DEFAULT 'baru',
+  `catatan` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `disposisi`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kategori`
+--
+
+CREATE TABLE `kategori` (
+  `id_kategori` int NOT NULL,
+  `nama_kategori` varchar(100) NOT NULL,
+  `keterangan` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `kategori`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pegawai`
+--
+
+CREATE TABLE `pegawai` (
+  `id_pegawai` int NOT NULL,
+  `nip` varchar(20) DEFAULT NULL,
+  `nama_pegawai` varchar(100) DEFAULT NULL,
+  `jabatan` varchar(50) DEFAULT NULL,
+  `golongan` varchar(10) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `pegawai`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `surat_keluar`
+--
+
+CREATE TABLE `surat_keluar` (
+  `id_suratkeluar` int NOT NULL,
+  `no_surat` varchar(50) NOT NULL,
+  `tgl_kirim` date NOT NULL,
+  `tgl_surat` date NOT NULL,
+  `tujuan` varchar(100) NOT NULL,
+  `perihal` varchar(150) DEFAULT NULL,
+  `isi_surat` text,
+  `file_surat` varchar(255) DEFAULT NULL,
+  `id_kategori` int DEFAULT NULL,
+  `id_admin` int DEFAULT NULL,
+  `status` enum('draft','terkirim') DEFAULT 'draft'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `surat_keluar`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `surat_masuk`
+--
+
+CREATE TABLE `surat_masuk` (
+  `id_suratmasuk` int NOT NULL,
+  `no_surat` varchar(50) NOT NULL,
+  `tgl_kirim` date NOT NULL,
+  `tgl_surat` date NOT NULL,
+  `pengirim` varchar(100) NOT NULL,
+  `perihal` varchar(150) DEFAULT NULL,
+  `isi_surat` text,
+  `file_surat` varchar(255) DEFAULT NULL,
+  `id_kategori` int DEFAULT NULL,
+  `id_admin` int DEFAULT NULL,
+  `status` enum('baru','dibaca','disposisi') DEFAULT 'baru',
+  `id_pegawai` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `surat_masuk`
+--
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `disposisi`
+--
+ALTER TABLE `disposisi`
+  ADD PRIMARY KEY (`id_disposisi`),
+  ADD KEY `fk_disposisi_suratmasuk` (`id_suratmasuk`),
+  ADD KEY `fk_disposisi_suratkeluar` (`id_suratkeluar`),
+  ADD KEY `fk_disposisi_admin` (`id_admin`);
+
+--
+-- Indexes for table `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indexes for table `pegawai`
+--
+ALTER TABLE `pegawai`
+  ADD PRIMARY KEY (`id_pegawai`);
+
+--
+-- Indexes for table `surat_keluar`
+--
+ALTER TABLE `surat_keluar`
+  ADD PRIMARY KEY (`id_suratkeluar`),
+  ADD KEY `id_kategori` (`id_kategori`),
+  ADD KEY `id_admin` (`id_admin`);
+
+--
+-- Indexes for table `surat_masuk`
+--
+ALTER TABLE `surat_masuk`
+  ADD PRIMARY KEY (`id_suratmasuk`),
+  ADD KEY `id_kategori` (`id_kategori`),
+  ADD KEY `id_admin` (`id_admin`),
+  ADD KEY `fk_suratmasuk_pegawai` (`id_pegawai`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `disposisi`
+--
+ALTER TABLE `disposisi`
+  MODIFY `id_disposisi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `pegawai`
+--
+ALTER TABLE `pegawai`
+  MODIFY `id_pegawai` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `surat_keluar`
+--
+ALTER TABLE `surat_keluar`
+  MODIFY `id_suratkeluar` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `surat_masuk`
+--
+ALTER TABLE `surat_masuk`
+  MODIFY `id_suratmasuk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `disposisi`
+--
+ALTER TABLE `disposisi`
+  ADD CONSTRAINT `fk_disposisi_admin` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_disposisi_suratkeluar` FOREIGN KEY (`id_suratkeluar`) REFERENCES `surat_keluar` (`id_suratkeluar`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_disposisi_suratmasuk` FOREIGN KEY (`id_suratmasuk`) REFERENCES `surat_masuk` (`id_suratmasuk`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_keluar`
+--
+ALTER TABLE `surat_keluar`
+  ADD CONSTRAINT `surat_keluar_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`),
+  ADD CONSTRAINT `surat_keluar_ibfk_2` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`);
+
+--
+-- Constraints for table `surat_masuk`
+--
+ALTER TABLE `surat_masuk`
+  ADD CONSTRAINT `fk_suratmasuk_pegawai` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`),
+  ADD CONSTRAINT `surat_masuk_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`),
+  ADD CONSTRAINT `surat_masuk_ibfk_2` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+tolong perbaiki agar erdnya menjadi seperit gambar terlampir
