@@ -27,15 +27,24 @@ if ($result->num_rows === 1) {
     if ($password === $user['password']) {
 
         $_SESSION['login']     = true;
-        $_SESSION['role']      = 'user'; // FIX PENTING
+        $_SESSION['role']      = $user['role'];  // admin / petugas
         $_SESSION['id_user']   = $user['id_user'];
         $_SESSION['nama_user'] = $user['nama_user'];
         $_SESSION['username']  = $user['username'];
 
-        header("Location: ../../dashboard.php?hal=dashboard_user");
-        exit;
+        // ========== REDIRECT OTOMATIS BERDASARKAN ROLE ==========
+        if ($user['role'] === 'admin') {
+            header("Location: ../../dashboard.php?hal=dashboard_user");
+            exit;
+        }
+
+        if ($user['role'] === 'petugas') {
+            header("Location: ../../dashboard.php?hal=dashboard_petugas");
+            exit;
+        }
     }
 }
 
+// Jika gagal login
 header("Location: " . BASE_URL . "?hal=login_user&pesan=" . urlencode("Username atau password salah"));
 exit;

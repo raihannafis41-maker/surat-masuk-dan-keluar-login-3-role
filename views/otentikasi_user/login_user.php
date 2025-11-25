@@ -18,8 +18,8 @@ if (!empty($_SESSION['role'])) {
         exit;
     }
 
-    if ($_SESSION['role'] === 'pegawai') {
-        header("Location: " . BASE_URL . "dashboard.php?hal=dashboard_pegawai");
+    if ($_SESSION['role'] === 'petugas') {
+        header("Location: " . BASE_URL . "dashboard.php?hal=dashboard_petugas");
         exit;
     }
 }
@@ -49,7 +49,7 @@ $error = $_GET['pesan'] ?? '';
       <div class="col-md-5">
         <div class="card shadow-lg border-0">
           <div class="card-body p-4">
-            <h3 class="text-center mb-4">Login User / Pegawai</h3>
+            <h3 class="text-center mb-4">Login User / Petugas</h3>
 
             <?php if ($error): ?>
               <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>

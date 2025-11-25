@@ -3,7 +3,7 @@
 // File: views/otentikasi_pegawai/login_pegawai.php
 // ============================================================
 
-// Include path & konfigurasi
+// Include path & konfigurasi — PASTIKAN INI TIDAK MENGELUARKAN HTML!
 require_once __DIR__ . '/../../includes/path.php';
 require_once INCLUDES_PATH . 'config.php';
 
@@ -12,7 +12,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Jika pegawai sudah login
+// Jika pegawai sudah login → redirect
 if (isset($_SESSION['role']) && $_SESSION['role'] === 'pegawai') {
     header("Location: " . BASE_URL . "dashboard.php?hal=dashboard_pegawai");
     exit;
@@ -49,7 +49,6 @@ $error = $_GET['pesan'] ?? '';
               <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
             <?php endif; ?>
 
-            <!-- FORM LOGIN -->
             <form method="POST" action="?hal=proses_login_pegawai">
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>

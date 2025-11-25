@@ -11,7 +11,7 @@ surat_masuk_dan_keluar_punya_raihan/
 │  │
 │  ├─ pegawai/                   ← layout untuk role pegawai (back office)
 │  │  ├─ header.php
-│  │  ├─ navbar.php
+│  │  ├─ navbar.phpA
 │  │  ├─ sidebar.php            ← menu lebih sederhana (hanya konten & komentar)
 │  │  └─ footer.php
 |  |  
@@ -49,6 +49,9 @@ surat_masuk_dan_keluar_punya_raihan/
 │  │  ├─ register_user.php           ← form pendaftaran (opsional)
 │  │  ├─ logout_user.php             ← proses logout (hapus session)
 │  │  └─ proses_login_user.php        ← proses backend login (cek ke DB, set session)
+|  |
+|  ├─petugas/
+|  | └─ dashboard_petugas.php     ← dashboard utama untuk petugas
 |  | 
 |  ├─pegawai/
 |  | └─ dashboard_pegawai.php     ← dashboard utama untuk pegawai tidak boleh ada kolola user
@@ -82,7 +85,7 @@ surat_masuk_dan_keluar_punya_raihan/
 │  │  │  ├─ daftar_pegawai.php
 |  |  |  ├─ hapus_pegawai.php
 │  │  │  ├─ tambah_pegawai.php
-│  │  │  ├─ tampilan_user.php       
+│  │  │  ├─ tampilan_pegawai.php       
 │  │  │  └─ edit_pegawai.php
 │  │  │
 │  │  ├─ surat_keluar/

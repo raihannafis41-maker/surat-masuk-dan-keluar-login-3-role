@@ -1,18 +1,13 @@
 <?php
 // =====================================================
-// File: views/user/dashboard_user.php (FINAL)
+// File: views/user/dashboard_user.php (FIXED FINAL)
 // =====================================================
 
-// Pastikan user login
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
-    header("Location: " . BASE_URL . "?hal=login_user");
-    exit;
-}
+// Tidak boleh melakukan header() di sini karena layout sudah output HTML
 
-$nama = $_SESSION['nama_user'] ?? $_SESSION['namauser'] ?? "User";
+$nama = $_SESSION['nama_user'] ?? "User";
 ?>
 
-<!-- Content Wrapper -->
 <section class="content">
     <div class="container-fluid">
 
